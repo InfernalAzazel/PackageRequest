@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-const { data, pending, execute } = await useTestRequest()
+const { data, pending, execute } = await useTestRequest({immediate: true,ssr: true})
 
-onMounted( async () =>{
-  await execute()
-})
+// onMounted( async () =>{
+//   await execute()
+// })
 
 </script>
 <template>
   <div>
-    <div> {{ data.data }}</div>
+    <div> {{ data }}</div>
     222
   </div>
 </template>

@@ -2,6 +2,7 @@ import {computed, MaybeRef, unref} from "vue";
 import {isObject} from "@vueuse/core";
 import {LocationQueryRaw, stringifyQuery} from "vue-router";
 import type {AsyncData} from "#app";
+import type {AsyncDataOptions} from "#app/composables/asyncData";
 
 export const useRequest = $fetch.create({
     // 请求拦截
@@ -30,10 +31,12 @@ export const useRequest = $fetch.create({
  * 封装 get 请求
  * @param url 请求地址
  * @param query 请求参数
+ * @param options 配置选项
  */
 export function useGet<T = unknown>(
     url: MaybeRef<string>,
-    query?: MaybeRef<unknown>
+    query?: MaybeRef<unknown>,
+    options?: AsyncDataOptions
 ): Promise<AsyncData<DataT>>  {
     const _url = computed(() => {
         const _url = unref(url)
@@ -43,9 +46,7 @@ export function useGet<T = unknown>(
             : _query || ''
         return `${_url}${queryString ? '?' : ''}${queryString}`
     })
-    return useAsyncData<T>(() => useRequest(_url.value, {method: 'get'}),
-        {immediate: false}
-    )
+    return useAsyncData<T>(() => useRequest(_url.value, {method: 'get'}), options)
 }
 
 /**
