@@ -6,7 +6,7 @@ export interface ResponseMessages <T>{
     done: boolean
     code: number
     msg: boolean
-    data: T[] | any
+    data: T | any
 }
 
 declare namespace API {

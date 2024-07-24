@@ -10,7 +10,7 @@ onMounted( async () =>{
 </script>
 <template>
   <div>
-    <div> {{ data }}</div>
+    <div> {{ data.data }}</div>
     222
   </div>
 </template>
