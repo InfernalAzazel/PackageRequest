@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-const { data, pending, execute } = await useTestRequest({immediate: true,ssr: true})
+import type {ResponseMessages} from "~/services/typings";
 
-// onMounted( async () =>{
-//   await execute()
-// })
+const { data, pending, execute } = await useAPI<ResponseMessages<any>>('https://www.kokoni.ltd/index/Article/loadArticleInfo?article_id=123')
+
+onMounted( async () =>{
+  await execute()
+})
 
 </script>
 <template>
